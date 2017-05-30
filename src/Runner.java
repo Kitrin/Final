@@ -22,29 +22,57 @@ public class Runner {
 
 		int intBase10 = 0;
 		String hexAnswer = "";
-
+		boolean cont = true;
+		String keepGoing = "";
+		
 		Runner myRunner = new Runner();
 		Converter myConverter = new Converter();
-
+		
 		myRunner.welcome();
+		
+		while (cont) {
+			
+			intBase10 = myRunner.enterInteger();
 
-		intBase10 = myRunner.enterInteger();
+			hexAnswer = myConverter.changeToHex(intBase10);
+			
+			JOptionPane.showMessageDialog(null, "0-255 entry: " + intBase10 + ", hex conversion: " + hexAnswer);
+			keepGoing = JOptionPane.showInputDialog("Would you like to enter another number? Y or N");
+			
+			if (keepGoing.equals("Y")) {
+				
+			}
+			else {
+				cont = false;
+			}
+			
+			// for testing, remove all syso when done
+			// System.out.println("0-255 entry: " + intBase10 + ", hex conversion: " + hexAnswer);
 
-		hexAnswer = myConverter.changeToHex(intBase10);
-
-		// for testing, remove all syso when done
-		System.out.println("0-255 entry: " + intBase10 + ", hex conversion: " + hexAnswer);
-
-		// now JOP the answer
-		// then JOP "Do you want to enter another 0-255 Yes or No"
-		// place this in a loop, keep looping as long as they answer Yes
+			// now JOP the answer
+			// then JOP "Do you want to enter another 0-255 Yes or No"
+			// place this in a loop, keep looping as long as they answer Yes
+			
+		}
 
 	}
 
 	private int enterInteger() {
-		// code for you to complete
-		// for basic test return 0 (hex 00), or 255 (hex FF)
-		return 255;
+		
+		boolean cont = false;
+		int number = 0;
+		while (!cont) {
+			number = Integer.parseInt(JOptionPane.showInputDialog("Enter a number between 0 and 255"));
+			if (number < 0 || number > 255) {
+				JOptionPane.showMessageDialog(null, "Sorry, that number isn't between 0 and 255!");
+			}
+			else {
+				cont = true;
+			}
+		}
+		
+		
+		return number;
 	}
 
 	private void welcome() {
